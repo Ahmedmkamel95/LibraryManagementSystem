@@ -19,6 +19,10 @@ namespace Library_managment_Systems.Controllers
      {
          db.Dispose();
      }
+        public void x()
+     {
+
+     }
 
         //
         // GET: /Account/
