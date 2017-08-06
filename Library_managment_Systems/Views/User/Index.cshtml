@@ -1,4 +1,4 @@
-﻿@model Library_managment_Systems.Models.User
+﻿@model LMS_model.User
 
 @{
     Layout = null;
@@ -17,7 +17,7 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     
     
-    @using (Html.BeginForm()) 
+    @using (Html.BeginForm("login","User",FormMethod.Post)) 
     {
         @Html.AntiForgeryToken()
         
@@ -37,7 +37,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.password, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.password)
+                    @Html.PasswordFor(model => model.password)
                     @Html.ValidationMessageFor(model => model.password)
                 </div>
             </div>

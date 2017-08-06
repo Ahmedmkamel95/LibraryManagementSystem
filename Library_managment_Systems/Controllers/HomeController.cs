@@ -6,19 +6,21 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Library_managment_Systems.Models;
+using LMS_model;
+using LMS_Core;
 
 namespace Library_managment_Systems.Controllers
 {
     public class HomeController : Controller
     {
-        private libarayDb db = new libarayDb();
+        private LibarayDB db = new LibarayDB();
 
-        
+     public    Book book = new Book();
         // GET: /Home/
         public ActionResult Index()
         {
-            return View(db.Books.ToList());
+            var m = db.Books.ToList();
+            return View(m);
         }
 
         // GET: /Home/Details/5
@@ -33,6 +35,7 @@ namespace Library_managment_Systems.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(book);
         }
 

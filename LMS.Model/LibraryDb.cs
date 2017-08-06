@@ -9,9 +9,9 @@ namespace Library_managment_Systems.Models
 {
     public class libarayDb : DbContext
     {
-       public DbSet<User> Users { get; set; }
-       public   DbSet<Book> Books { get; set; }
-       public libarayDb()
+        public DbSet<User> Users { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public libarayDb()
             : base("Dev_library")
         {
 

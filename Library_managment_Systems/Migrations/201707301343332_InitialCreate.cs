@@ -24,7 +24,7 @@ namespace Library_managment_Systems.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        name = c.String(nullable: false),
+                        Username = c.String(nullable: false),
                         password = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
