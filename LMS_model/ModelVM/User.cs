@@ -19,9 +19,6 @@ namespace LMS_model
 
 
 
-        public int login(User model)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

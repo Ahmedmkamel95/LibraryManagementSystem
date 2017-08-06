@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using LMS_model;
-using LMS_Core;
+
+using LMS_Core.Business;
 namespace Library_managment_Systems.Controllers
 {
+    [AllowAnonymous]
     public class UserController : Controller
     {
         //
-        User user = new User();
+        UserBL x = new UserBL();
         
         // GET: /User/
 
@@ -19,18 +20,7 @@ namespace Library_managment_Systems.Controllers
         {
             return View();
         }
-        public ActionResult login(User model)
-        {
-            int check = user.login(model);
-            if (check != 0)
-            {
-                //    TempData["id"] = model.user_id;
-                return RedirectToAction("Index", "Home", new { id = check });
-            }
-            else
-                return RedirectToAction("login");
-
-        }
+      
 
         
 

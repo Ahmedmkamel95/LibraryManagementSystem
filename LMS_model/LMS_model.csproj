@@ -36,6 +36,15 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -46,6 +55,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201708061741400_removefunction.cs" />
+    <Compile Include="Migrations\201708061741400_removefunction.Designer.cs">
+      <DependentUpon>201708061741400_removefunction.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModelVM\Book.cs" />
     <Compile Include="ModelVM\LibarayDB.cs" />
     <Compile Include="Migrations\201708011357576_AddNewCol1.cs" />
@@ -77,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708011410570_dropcolAddress.resx">
       <DependentUpon>201708011410570_dropcolAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708061741400_removefunction.resx">
+      <DependentUpon>201708061741400_removefunction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

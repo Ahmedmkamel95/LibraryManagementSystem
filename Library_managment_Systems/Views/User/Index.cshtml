@@ -1,35 +1,27 @@
 ﻿@model LMS_model.User
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+<link href="~/Content/bootstrap-lumen.css" rel="stylesheet" />
+    
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    
-    
     @using (Html.BeginForm("login","User",FormMethod.Post)) 
     {
         @Html.AntiForgeryToken()
+        <br />
+        <br />
+        <br />
         
         <div class="form-horizontal">
-            <h4>User</h4>
-            <hr />
+            <h2>Login</h2>
+            
             @Html.ValidationSummary(true)
     
             <div class="form-group">
                 @Html.LabelFor(model => model.Username, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Username)
+                    <br />
+                    @Html.TextBoxFor(model => model.Username, new  { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Username)
                 </div>
             </div>
@@ -37,14 +29,19 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.password, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.PasswordFor(model => model.password)
+                    <br />
+                    @Html.PasswordFor(model => model.password, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.password)
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    
+                    <input type="submit" value="Login" class="btn btn-default" />
+
+                    <br />
+                  @Html.ActionLink("Forget my password", "Index", "Home", null, new { @class = "navbar-brand" })
                 </div>
             </div>
         </div>
@@ -53,5 +50,3 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
-</body>
-</html>
