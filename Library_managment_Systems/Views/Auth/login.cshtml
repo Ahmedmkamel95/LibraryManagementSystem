@@ -25,17 +25,14 @@
     </div>
     <p>
         <button type="submit" class="btn btn-primary">Log In</button>
-        <button type="submit" class="btn btn-primary">Sing UP</button>
+        
+        @Html.ActionLink("Sing UP", "Registeration", "Auth", new { @class = "btn btn-primary"} )
         
     </p>
     <p>
         @*<button type="submit" class="btn btn-primary">Sing UP</button>*@
-        @Html.ActionLink("Sing UP", "Registeration", "Auth")<br />
     </p>
    
     @Html.ActionLink("Forget My password", "Registeration", "Auth")
     
-    
-    
-   
-}
+ }

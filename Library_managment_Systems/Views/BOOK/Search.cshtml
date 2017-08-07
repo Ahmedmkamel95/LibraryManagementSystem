@@ -1,39 +1,30 @@
 ﻿@model IEnumerable<LMS_model.Book>
 
 @{
-    Layout = null;
-    <link href="~/Content/bootstrap-lumen.css" rel="stylesheet" />
-    
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Search</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SBIN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfCopied)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.describtion)
-            </th>
-            <th></th>
-        </tr>
-    
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SBIN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfCopied)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.describtion)
+        </th>
+        <th></th>
+    </tr>
+
     @foreach (var item in Model) {
         <tr>
             <td>
@@ -55,7 +46,6 @@
             </td>
         </tr>
     }
-    
-    </table>
-</body>
-</html>
+
+</table>
+

@@ -13,14 +13,14 @@ namespace Library_managment_Systems.Controllers
     {
         public BookBL BookBl = new BookBL();
 
-        
+
         // GET: /BOOK/
         public ActionResult Index()
         {
             var model = BookBl.GetAllbook();
             return View(model);
         }
-        public ActionResult Details(int? id )
+        public ActionResult Details(int? id)
         {
             var model = BookBl.GetDetails(id);
             return View(model);
@@ -32,14 +32,13 @@ namespace Library_managment_Systems.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="id,title,SBIN,NumberOfCopied,describtion")] Book book)
+        public ActionResult Create([Bind(Include = "id,title,SBIN,NumberOfCopied,describtion")] Book book)
         {
-             if (ModelState.IsValid)
-             {
-                 BookBl.CreateBook(book);
-             }
-             return RedirectToAction("Index", "BOOK");
+            if (ModelState.IsValid)
+            {
+                BookBl.CreateBook(book);
+            }
+            return RedirectToAction("Index", "BOOK");
 
         }
         //Get
@@ -55,14 +54,14 @@ namespace Library_managment_Systems.Controllers
                 return View(m);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit ([Bind(Include="id,title,SBIN,NumberOfCopied,describtion")] Book book)
+
+        public ActionResult Edit([Bind(Include = "id,title,SBIN,NumberOfCopied,describtion")] Book book)
         {
             if (ModelState.IsValid)
                 BookBl.EditBookData(book);
             return RedirectToAction("Index", "BOOK");
         }
-        public ActionResult Delete (int ?id)
+        public ActionResult Delete(int? id)
         {
             var m = BookBl.CheckFind(id);
             if (id == null)
@@ -70,19 +69,18 @@ namespace Library_managment_Systems.Controllers
             else
                 return View(m);
         }
-    [HttpPost,ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete")]
         public ActionResult ConfirmedDelete(int? id)
         {
-          
-                BookBl.Delete(id);
-                return RedirectToAction("Index", "BOOK");
-            
+
+            BookBl.Delete(id);
+            return RedirectToAction("Index", "BOOK");
+
         }
-        public ActionResult Search(string title)
-    {
-       var m= BookBl.Search(title);
-        return View("Search",m);
+        public ActionResult Search(string SearchInput)
+        {
+            var m = BookBl.Search(SearchInput);
+            return View("Index", m);
+        }
     }
-	}
 }

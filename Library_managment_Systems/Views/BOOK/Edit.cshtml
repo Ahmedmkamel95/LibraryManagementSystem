@@ -1,27 +1,15 @@
 ﻿@model LMS_model.Book
 
 @{
-    Layout = null;
-    <link href="~/Content/bootstrap-lumen.css" rel="stylesheet" />
-    
+  Layout = "~/Views/Shared/_Layout.cshtml";  
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     
     
     @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken()
+      
         
         <div class="form-horizontal">
             <h4>Book</h4>
@@ -72,5 +60,4 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
-</body>
-</html>
+

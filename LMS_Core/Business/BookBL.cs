@@ -21,7 +21,7 @@ namespace LMS_Core.Business
         }
         public List<Book> Search(string title)
         {
-            var listOfBooks = db.Books.Where(s=>s.title.Contains(title)).ToList();
+            var listOfBooks = db.Books.Where(s=>s.title==title).ToList();
             return listOfBooks;
         }
 
