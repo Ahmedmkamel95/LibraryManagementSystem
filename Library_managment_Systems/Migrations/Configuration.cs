@@ -6,7 +6,7 @@ namespace Library_managment_Systems.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<LibarayDB>
+    internal sealed class Configuration : DbMigrationsConfiguration<LibarayDBContext>
     {
         public Configuration()
         {
@@ -14,7 +14,7 @@ namespace Library_managment_Systems.Migrations
             ContextKey = "Library_managment_Systems.Models.libarayDb";
         }
 
-        protected override void Seed(LibarayDB context)
+        protected override void Seed(LibarayDBContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -8,17 +8,21 @@
 <br />
 <br />
 
-@using (Html.BeginForm("Search", "BOOK", FormMethod.Post))
-{
-    <div class="form-group">
-        <input type="text" name="SearchInput" value="" />
-        <input type="submit" name="submit" value="Search" class="btn btn-primary" />
-    </div>
-}
+<div id="table">
+    @using (Ajax.BeginForm("Search", "BOOK", new AjaxOptions { UpdateTargetId = "Table" }))
+    {
+        <div class="form-group">
+            <input type="text" name="SearchInput" value="" />
+            <input type="submit" name="submit" value="Search" class="btn btn-primary" />
+        </div>
+    }
+</div>
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table class="table">
     <tr>
         <th>

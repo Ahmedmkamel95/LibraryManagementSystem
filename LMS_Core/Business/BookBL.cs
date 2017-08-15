@@ -10,7 +10,7 @@ namespace LMS_Core.Business
    
    public  class BookBL
     {
-        private LibarayDB db = new LibarayDB();
+        private LibarayDBContext db = new LibarayDBContext();
 
         public Book book = new Book();
         
@@ -21,7 +21,7 @@ namespace LMS_Core.Business
         }
         public List<Book> Search(string title)
         {
-            var listOfBooks = db.Books.Where(s=>s.title==title).ToList();
+            var listOfBooks = db.Books.Where(s=>s.title.Contains(title.Trim())).ToList();
             return listOfBooks;
         }
 

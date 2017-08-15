@@ -5,14 +5,15 @@ namespace LMS_model.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<LMS_model.LibarayDB>
+    internal sealed class Configuration : DbMigrationsConfiguration<LMS_model.LibarayDBContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(LMS_model.LibarayDB context)
+        protected override void Seed(LMS_model.LibarayDBContext context)
         {
             //  This method will be called after migrating to the latest version.
 

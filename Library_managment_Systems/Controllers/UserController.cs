@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using LMS_Core.Business;
+using LMS_model;
 namespace Library_managment_Systems.Controllers
 {
     [AllowAnonymous]
@@ -21,8 +22,18 @@ namespace Library_managment_Systems.Controllers
             return View();
         }
       
+        public ActionResult login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(User model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
 
-        
+            return View(model);
 
+        }
 	}
 }

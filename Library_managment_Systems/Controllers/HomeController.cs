@@ -13,7 +13,7 @@ namespace Library_managment_Systems.Controllers
 {
     public class HomeController : Controller
     {
-        private LibarayDB db = new LibarayDB();
+        private LibarayDBContext db = new LibarayDBContext();
 
      public    Book book = new Book();
         // GET: /Home/

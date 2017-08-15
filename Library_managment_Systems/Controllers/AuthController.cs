@@ -1,5 +1,7 @@
 ﻿using Library_managment_Systems.CustomLibraries;
 using LMS_model;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,16 @@ namespace Library_managment_Systems.Controllers
 	[AllowAnonymous]
 	public class AuthController : Controller
 	{
-		private LibarayDB _context;
-		public AuthController()
+
+
+        UserStore<User> us;
+        UserManager<User> u;
+        private LibarayDBContext _context;
+		
+        
+        public AuthController()
 		{
-			_context = new LibarayDB();
+			_context = new LibarayDBContext();
 		}
 		protected override void Dispose(bool disposing)
 		{
@@ -23,78 +31,82 @@ namespace Library_managment_Systems.Controllers
 		}
 
 		// GET: Auth
-		public ActionResult Login()
+		
+        
+        public ActionResult Login()
 		{
 			return View();
 		}
 
-		[HttpPost]
-		public ActionResult Login(User model)
-		{
-			if (!ModelState.IsValid)
-				return View(model);
+        [HttpPost]
+        public ActionResult Login(User model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
 
-			var user = _context.Users.SingleOrDefault(u => u.Username == model.Username);
-			var decryptedPassword = CustomDecrypt.Decrypt(user.password);
+            var user = _context.Users.SingleOrDefault(u => u.UserName == model.UserName);
+            var decryptedPassword = CustomDecrypt.Decrypt(user.PasswordHash);
 
-			if (model.Username != null && model.password == decryptedPassword)
-			{
-				//ClaimsIdentity contains information (Claims) about the current user
-				var identity = new ClaimsIdentity(new []{
-					new Claim(ClaimTypes.Name, user.Username),
-				},"ApplicationCookie");
+            if (model.UserName != null && model.PasswordHash == decryptedPassword)
+            {
+                //ClaimsIdentity contains information (Claims) about the current user
+                var identity = new ClaimsIdentity(new[]{
+                    new Claim(ClaimTypes.Name, user.UserName),
+                }, "ApplicationCookie");
 
-				//Request is an object that reads HTTP request values
-				//GetOwinContext Gets the owin context that links the middleware to the request
-				var ctx = Request.GetOwinContext();
-				//Authentication property links the middleware to an authentication to the app
-				var authManager = ctx.Authentication;
-				//SignIn gets the list of claims and uses to authenticate those values to be persisted throughout the app
-				//SignIn sets the authentication cookie on the client.
-				authManager.SignIn(identity);
+                //Request is an object that reads HTTP request values
+                //GetOwinContext Gets the owin context that links the middleware to the request
+                var ctx = Request.GetOwinContext();
 
-				//return Redirect(GetRedirect(model.ReturnUrl));
-				return RedirectToAction("Index", "Book");
-			}
+                //Authentication property links the middleware to an authentication to the app
+                var authManager = ctx.Authentication;
 
-			ModelState.AddModelError("", "Invalid email or password");
-			return View(model);
-		}
+                //SignIn gets the list of claims and uses to authenticate those values to be persisted throughout the app
+                //SignIn sets the authentication cookie on the client.
+                authManager.SignIn(identity);
 
-		public ActionResult Logout()
-		{
-			var ctx = Request.GetOwinContext();
-			var authManager = ctx.Authentication;
+                //return Redirect(GetRedirect(model.ReturnUrl));
+                return RedirectToAction("Index", "Book");
+            }
 
-			authManager.SignOut("ApplicationCookie");
+            ModelState.AddModelError("", "Invalid email or password");
+            return View(model);
+        }
 
-			return RedirectToAction("Login", "Auth");
-		}
+        public ActionResult Logout()
+        {
+            var ctx = Request.GetOwinContext();
+            var authManager = ctx.Authentication;
 
-		public ActionResult Registeration()
-		{
-			return View();
-		}
+            authManager.SignOut("ApplicationCookie");
 
-		[HttpPost]
-		public ActionResult Registeration(User user)
-		{
-			if (!ModelState.IsValid)
-				return View(user);
+            return RedirectToAction("Login", "Auth");
+        }
 
-			user.password = CustomEncrypt.Encrypt(user.password);
-			_context.Users.Add(user);
-			_context.SaveChanges();
+        public ActionResult Registeration()
+        {
+            return View();
+        }
 
-			var identity = new ClaimsIdentity(new []{
-					new Claim(ClaimTypes.Name, user.Username)
-				}, "ApplicationCookie");
+        [HttpPost]
+        public ActionResult Registeration(User user)
+        {
+            if (!ModelState.IsValid)
+                return View(user);
 
-			var ctx = Request.GetOwinContext();
-			var authManager = ctx.Authentication;
-			authManager.SignIn(identity);
+            user.PasswordHash = CustomEncrypt.Encrypt(user.PasswordHash);
+            _context.Users.Add(user);
+            _context.SaveChanges();
 
-			return RedirectToAction("Index", "Book");
-		}
+            var identity = new ClaimsIdentity(new[]{
+                    new Claim(ClaimTypes.Name, user.UserName)
+                }, "ApplicationCookie");
+
+            var ctx = Request.GetOwinContext();
+            var authManager = ctx.Authentication;
+            authManager.SignIn(identity);
+
+            return RedirectToAction("Index", "Book");
+        }
 	}
 }
